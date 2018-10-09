@@ -13,6 +13,7 @@
 		AA077676216D702300FA9933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA077675216D702300FA9933 /* Assets.xcassets */; };
 		AA077679216D702300FA9933 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA077677216D702300FA9933 /* LaunchScreen.storyboard */; };
 		AA077684216D702300FA9933 /* Amusement_Park_Pass_GeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA077683216D702300FA9933 /* Amusement_Park_Pass_GeneratorTests.swift */; };
+		AA07768F216D706600FA9933 /* EntrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07768E216D706600FA9933 /* EntrantType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		AA07767F216D702300FA9933 /* Amusement Park Pass GeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Amusement Park Pass GeneratorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA077683216D702300FA9933 /* Amusement_Park_Pass_GeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amusement_Park_Pass_GeneratorTests.swift; sourceTree = "<group>"; };
 		AA077685216D702300FA9933 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA07768E216D706600FA9933 /* EntrantType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrantType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				AA077675216D702300FA9933 /* Assets.xcassets */,
 				AA077677216D702300FA9933 /* LaunchScreen.storyboard */,
 				AA07767A216D702300FA9933 /* Info.plist */,
+				AA07768E216D706600FA9933 /* EntrantType.swift */,
 			);
 			path = "Amusement Park Pass Generator";
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA077671216D702200FA9933 /* ViewController.swift in Sources */,
+				AA07768F216D706600FA9933 /* EntrantType.swift in Sources */,
 				AA07766F216D702200FA9933 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
