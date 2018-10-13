@@ -41,7 +41,7 @@ class Employee: Person
     
     
     
-    init(firstName: String, lastName: String, dateOfBirth: String, address: String, city: String, state: String, zipCode: String, empolyeeType: EmployeeType)
+    init(firstName: String, lastName: String, dateOfBirth: String, address: String, city: String, state: String, zipCode: String, empolyeeType: EmployeeType) throws
     {
         self.firstName = firstName
         self.lastName = lastName
@@ -178,7 +178,19 @@ class ChildGuest: Guest
 
 
 
-
+extension Person
+{
+    func printAccessMessage(forArea: Bool)
+    {
+        if (forArea)
+        {
+            print("You May Proceed")
+        } else
+        {
+            print("You Have No Access Here")
+        }
+    }
+}
 
 
 
