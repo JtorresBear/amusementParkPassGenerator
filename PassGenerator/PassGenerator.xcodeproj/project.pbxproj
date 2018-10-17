@@ -12,7 +12,6 @@
 		AAE46680216D896B00BA6E37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE4667E216D896B00BA6E37 /* Main.storyboard */; };
 		AAE46682216D896B00BA6E37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAE46681216D896B00BA6E37 /* Assets.xcassets */; };
 		AAE46685216D896B00BA6E37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE46683216D896B00BA6E37 /* LaunchScreen.storyboard */; };
-		AAE46690216D896C00BA6E37 /* PassGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4668F216D896C00BA6E37 /* PassGeneratorTests.swift */; };
 		AAE4669B216D8A1D00BA6E37 /* Guests and Employees.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4669A216D8A1D00BA6E37 /* Guests and Employees.swift */; };
 		AAE4669D216D8DA200BA6E37 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4669C216D8DA200BA6E37 /* Person.swift */; };
 		AAE4669F216FAECC00BA6E37 /* Possible Errros.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4669E216FAECC00BA6E37 /* Possible Errros.swift */; };
@@ -37,8 +36,6 @@
 		AAE46684216D896B00BA6E37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AAE46686216D896B00BA6E37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAE4668B216D896C00BA6E37 /* PassGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAE4668F216D896C00BA6E37 /* PassGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassGeneratorTests.swift; sourceTree = "<group>"; };
-		AAE46691216D896C00BA6E37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAE4669A216D8A1D00BA6E37 /* Guests and Employees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Guests and Employees.swift"; sourceTree = "<group>"; };
 		AAE4669C216D8DA200BA6E37 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		AAE4669E216FAECC00BA6E37 /* Possible Errros.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Possible Errros.swift"; sourceTree = "<group>"; };
@@ -66,7 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				AAE46679216D896B00BA6E37 /* PassGenerator */,
-				AAE4668E216D896C00BA6E37 /* PassGeneratorTests */,
 				AAE46678216D896B00BA6E37 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,15 +90,6 @@
 				AAE4669E216FAECC00BA6E37 /* Possible Errros.swift */,
 			);
 			path = PassGenerator;
-			sourceTree = "<group>";
-		};
-		AAE4668E216D896C00BA6E37 /* PassGeneratorTests */ = {
-			isa = PBXGroup;
-			children = (
-				AAE4668F216D896C00BA6E37 /* PassGeneratorTests.swift */,
-				AAE46691216D896C00BA6E37 /* Info.plist */,
-			);
-			path = PassGeneratorTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,7 +205,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAE46690216D896C00BA6E37 /* PassGeneratorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

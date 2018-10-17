@@ -7,13 +7,16 @@
 //
 
 import Foundation
-
+import UIKit
 
 protocol Person
 {
     var firstName: String? {get set}
     var lastName: String? {get set}
-    var dateOfBirth: String? {get set}
+    
+    var dobDay: Int? {get set}
+    var dobMonth: Int? {get set}
+    var dobYear: Int? {get set}
     
     var address: String? {get set}
     var city: String? {get set}
@@ -26,34 +29,49 @@ protocol Person
 
 class Employee: Person
 {
+    var dobDay: Int?
+    
+    var dobMonth: Int?
+    
+    var dobYear: Int?
+    
     var firstName: String?
     var lastName: String?
-    var dateOfBirth: String?
+    
     var address: String?
     var city: String?
     var state: String?
     var zipCode: String?
     var foodDiscount: Double
     var merchDiscount: Double
+    var employee: EmployeeType
     
     var areaAccess = AreaAccess()
     var rideaccess = RideAccess()
     
     
     
-    init(firstName: String, lastName: String, dateOfBirth: String, address: String, city: String, state: String, zipCode: String, empolyeeType: EmployeeType) throws
+    init(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipCode: String?, employeeType: EmployeeType) throws
     {
-        self.firstName = firstName
-        self.lastName = lastName
-        self.dateOfBirth = dateOfBirth
-        self.address = address
-        self.city = city
-        self.state = state
-        self.zipCode = zipCode
+        guard let nameOne = firstName else {throw PossibleErrors.noFIrstName}
+        guard let nameTwo = lastName else {throw PossibleErrors.noLastName}
+        guard let addressone = address else {throw PossibleErrors.noAddress}
+        guard let city1 = city else {throw PossibleErrors.noCity}
+        guard let state1 = state else {throw PossibleErrors.noState}
+        guard let zipcode1 = zipCode else {throw PossibleErrors.noZipCode}
         
-        self.foodDiscount = empolyeeType.foodDiscount
-        self.merchDiscount = empolyeeType.merchandiseDiscount
-        self.areaAccess.figureOutAccess(employeeType: empolyeeType)
+        
+        self.firstName = nameOne
+        self.lastName = nameTwo
+        self.address = addressone
+        self.city = city1
+        self.state = state1
+        self.zipCode = zipcode1
+        
+        self.foodDiscount = employeeType.foodDiscount
+        self.merchDiscount = employeeType.merchandiseDiscount
+        self.areaAccess.figureOutAccess(employeeType: employeeType)
+        self.employee = employeeType
     }
     
     
@@ -70,16 +88,6 @@ class Employee: Person
         }
     }
     
-    func printAccessMessage(forArea: Bool)
-    {
-        if (forArea)
-        {
-            print("You May Proceed")
-        } else
-        {
-            print("You Have No Access Here")
-        }
-    }
     
     func giveFoodDiscount()-> Double
     {
@@ -96,9 +104,12 @@ class Employee: Person
 
 class Guest: Person
 {
+    var dobDay: Int?
+    var dobMonth: Int?
+    var dobYear: Int?
+    
     var firstName: String?
     var lastName: String?
-    var dateOfBirth: String?
     var address: String?
     var city: String?
     var state: String?
@@ -109,11 +120,12 @@ class Guest: Person
     var areaAccess = AreaAccess()
     var rideaccess = RideAccess()
     
-    init(firstName: String?, lastName: String?, dateOfBirth: String?, address: String?, city: String?, state: String?, zipCode: String?, guestType: GuestType) throws
+    init(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipCode: String?, guestType: GuestType, dobDay: Int?, dobMonth: Int?, dobYear: Int?) throws
     {
+        guard let firstName = firstName else {throw PossibleErrors.noFIrstName}
+        guard let lastName = lastName else {throw PossibleErrors.noLastName}
         self.firstName = firstName
         self.lastName = lastName
-        self.dateOfBirth = dateOfBirth
         self.address = address
         self.city = city
         self.state = state
@@ -125,7 +137,7 @@ class Guest: Person
     }
     
     
-    func employeeSwipe(for access: AreaAccessList) -> Bool
+    func guestSwipe(for access: AreaAccessList) -> Bool
     {
         switch access
         {
@@ -163,9 +175,14 @@ class Guest: Person
 
 class ChildGuest: Guest
 {
-    override init(firstName: String?, lastName: String?, dateOfBirth: String?, address: String?, city: String?, state: String?, zipCode: String?, guestType: GuestType) throws {
-        try super.init(firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, address: address, city: city, state: state, zipCode: zipCode, guestType: guestType)
+    override init(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipCode: String?, guestType: GuestType, dobDay: Int?, dobMonth: Int?, dobYear: Int?) throws {
+        guard let dobDay = dobDay else {throw PossibleErrors.missingBirthDay}
+        guard let dobMonth = dobMonth else {throw PossibleErrors.missingMonth}
+        guard let dobYear = dobYear else {throw PossibleErrors.missingYear}
+        
+        try super.init(firstName: firstName, lastName: lastName, address: address, city: city, state: state, zipCode: zipCode, guestType: guestType, dobDay: dobDay, dobMonth: dobMonth, dobYear: dobYear)
     }
+
 }
 
 
@@ -191,18 +208,6 @@ extension Person
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

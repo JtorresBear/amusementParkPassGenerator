@@ -21,6 +21,9 @@ enum PossibleErrors: Error
     case noZipCode
     case olderThanFive
     case notASenior
+    case missingBirthDay
+    case missingMonth
+    case missingYear
 }
 
 
