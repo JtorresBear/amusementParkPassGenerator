@@ -30,9 +30,7 @@ protocol Person
 class Employee: Person
 {
     var dobDay: Int?
-    
     var dobMonth: Int?
-    
     var dobYear: Int?
     
     var firstName: String?
@@ -76,15 +74,15 @@ class Employee: Person
     
     
     
-    func employeeSwipe(for access: AreaAccessList) -> Bool
+    func employeeSwipe(for access: AreaAccessList) throws -> Bool
     {
         switch access
         {
-        case .amusementArea: printAccessMessage(forArea: areaAccess.amusementAreas); return areaAccess.amusementAreas
-        case .kitchenArea: printAccessMessage(forArea: areaAccess.kitchenAreas); return areaAccess.kitchenAreas
-        case .maintenanceArea:printAccessMessage(forArea: areaAccess.maintenanceAreas); return areaAccess.maintenanceAreas
-        case .officeArea: printAccessMessage(forArea: areaAccess.OfficeAreas); return areaAccess.OfficeAreas
-        case .rideControlArea:printAccessMessage(forArea: areaAccess.rideControlAreas); return areaAccess.rideControlAreas
+        case .amusementArea: printAccessMessage(forArea: areaAccess.amusementAreas, area: access);if(!areaAccess.amusementAreas){throw PossibleErrors.notAllowed}; return areaAccess.amusementAreas
+        case .kitchenArea: printAccessMessage(forArea: areaAccess.kitchenAreas, area: access);if(!areaAccess.kitchenAreas){throw PossibleErrors.notAllowed}; return areaAccess.kitchenAreas
+        case .maintenanceArea:printAccessMessage(forArea: areaAccess.maintenanceAreas, area: access);if(!areaAccess.maintenanceAreas){throw PossibleErrors.notAllowed}; return areaAccess.maintenanceAreas
+        case .officeArea: printAccessMessage(forArea: areaAccess.OfficeAreas, area: access);if(!areaAccess.OfficeAreas){throw PossibleErrors.notAllowed}; return areaAccess.OfficeAreas
+        case .rideControlArea:printAccessMessage(forArea: areaAccess.rideControlAreas, area: access);if(!areaAccess.rideControlAreas){throw PossibleErrors.notAllowed}; return areaAccess.rideControlAreas
         }
     }
     
@@ -122,14 +120,15 @@ class Guest: Person
     
     init(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipCode: String?, guestType: GuestType, dobDay: Int?, dobMonth: Int?, dobYear: Int?) throws
     {
-        guard let firstName = firstName else {throw PossibleErrors.noFIrstName}
-        guard let lastName = lastName else {throw PossibleErrors.noLastName}
         self.firstName = firstName
         self.lastName = lastName
         self.address = address
         self.city = city
         self.state = state
         self.zipCode = zipCode
+        self.dobDay = dobDay
+        self.dobYear = dobYear
+        self.dobMonth = dobMonth
         
         self.foodDiscount = guestType.foodDiscount
         self.merchDiscount = guestType.merchandiseDiscount
@@ -137,28 +136,18 @@ class Guest: Person
     }
     
     
-    func guestSwipe(for access: AreaAccessList) -> Bool
+    func guestSwipe(for access: AreaAccessList)throws -> Bool
     {
         switch access
         {
-        case .amusementArea: printAccessMessage(forArea: areaAccess.amusementAreas); return areaAccess.amusementAreas
-        case .kitchenArea: printAccessMessage(forArea: areaAccess.kitchenAreas); return areaAccess.kitchenAreas
-        case .maintenanceArea:printAccessMessage(forArea: areaAccess.maintenanceAreas); return areaAccess.maintenanceAreas
-        case .officeArea: printAccessMessage(forArea: areaAccess.OfficeAreas); return areaAccess.OfficeAreas
-        case .rideControlArea:printAccessMessage(forArea: areaAccess.rideControlAreas); return areaAccess.rideControlAreas
+        case .amusementArea: printAccessMessage(forArea: areaAccess.amusementAreas, area: access);if(!areaAccess.amusementAreas){throw PossibleErrors.notAllowed}; return areaAccess.amusementAreas
+        case .kitchenArea: printAccessMessage(forArea: areaAccess.kitchenAreas, area: access);if(!areaAccess.kitchenAreas){throw PossibleErrors.notAllowed}; return areaAccess.kitchenAreas
+        case .maintenanceArea:printAccessMessage(forArea: areaAccess.maintenanceAreas, area: access);if(!areaAccess.maintenanceAreas){throw PossibleErrors.notAllowed}; return areaAccess.maintenanceAreas
+        case .officeArea: printAccessMessage(forArea: areaAccess.OfficeAreas, area: access);if(!areaAccess.OfficeAreas){throw PossibleErrors.notAllowed}; return areaAccess.OfficeAreas
+        case .rideControlArea:printAccessMessage(forArea: areaAccess.rideControlAreas, area: access);if(!areaAccess.rideControlAreas){throw PossibleErrors.notAllowed}; return areaAccess.rideControlAreas
         }
     }
     
-    func printAccessMessage(forArea: Bool)
-    {
-        if (forArea)
-        {
-            print("You May Proceed")
-        } else
-        {
-            print("You Have No Access Here")
-        }
-    }
     
     func giveFoodDiscount()-> Double
     {
@@ -180,8 +169,27 @@ class ChildGuest: Guest
         guard let dobMonth = dobMonth else {throw PossibleErrors.missingMonth}
         guard let dobYear = dobYear else {throw PossibleErrors.missingYear}
         
+        let date = Date()
+        let calendar = Calendar.current
+        
+        if(calendar.component(.year, from: date) - dobYear >= 5)
+        {
+            if(dobMonth <= calendar.component(.month, from: date) )
+            {
+                if (dobDay <= calendar.component(.day , from: date) )
+                {
+                    throw PossibleErrors.olderThanFive
+                }
+            }
+        }
+        
         try super.init(firstName: firstName, lastName: lastName, address: address, city: city, state: state, zipCode: zipCode, guestType: guestType, dobDay: dobDay, dobMonth: dobMonth, dobYear: dobYear)
     }
+    
+    
+    
+    
+    
 
 }
 
@@ -197,16 +205,27 @@ class ChildGuest: Guest
 
 extension Person
 {
-    func printAccessMessage(forArea: Bool)
+    func printAccessMessage(forArea: Bool, area: AreaAccessList)
     {
+        var areaAccess: String = "nothing"
+        switch area
+        {
+        case .amusementArea: areaAccess = "Amusement Areas"
+        case .kitchenArea: areaAccess = "Kitchen Areas"
+        case .maintenanceArea: areaAccess = "Maintenance Areas"
+        case .officeArea: areaAccess = "Office Areas"
+        case .rideControlArea: areaAccess = "Ride Control Areas"
+        }
+
         if (forArea)
         {
-            print("You May Proceed")
+            print("You May Proceed into \(areaAccess)")
         } else
         {
             print("You Have No Access Here")
         }
     }
+    
 }
 
 

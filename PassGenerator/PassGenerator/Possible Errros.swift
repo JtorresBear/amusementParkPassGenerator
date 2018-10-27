@@ -24,6 +24,7 @@ enum PossibleErrors: Error
     case missingBirthDay
     case missingMonth
     case missingYear
+    case notAllowed
 }
 
 
