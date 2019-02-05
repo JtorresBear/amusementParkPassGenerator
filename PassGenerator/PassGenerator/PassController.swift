@@ -36,6 +36,8 @@ class PassController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let stuff = pass?.person.firstName { NameLabel.text = stuff}
+        
+        
         // Do any additional setup after loading the view.
         
     }

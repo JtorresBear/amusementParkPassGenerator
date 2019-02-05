@@ -345,6 +345,7 @@ class ViewController: UIViewController {
                 let manager = try Employee(firstName: FirstNameTextField.text, lastName: LastNameTextField.text, address: StreetAddressTextField.text, city: CityTextField.text, state: StateTextField.text, zipCode: ZipCodeTextField.text, employeeType: employeeTypeP, dobDay: Int(DDTextField.text!) , dobMonth: Int(MMTextField.text!), dobYear: Int(YYYYTextField.text!), ssn: SSNTextField.text)
                 print("there's no problem here?")
                 pass = Pass(person: manager, entrantType: .manager)
+                print("there's no problem here?")
             }
             catch {print("there's a problem")}
         case .employee: switch employeeTypeP
@@ -378,6 +379,26 @@ class ViewController: UIViewController {
     
     
     
+    @IBAction func populateData(_ sender: UIButton) {
+        
+        DDTextField.text = "12"
+        MMTextField.text = "12"
+        YYYYTextField.text = "1221"
+        
+        FirstNameTextField.text = "Jones"
+        LastNameTextField.text = "LEE"
+        
+        SSNTextField.text = "112121212"
+        
+        CompanyTextField.text = "Bazaar"
+        
+        StreetAddressTextField.text = "1232"
+        CityTextField.text = "albany"
+        StateTextField.text = "new york"
+        ZipCodeTextField.text = "23232"
+        
+        
+    }
     
     
     
