@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA60C88021DE0D76008CECE7 /* PassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA60C87F21DE0D76008CECE7 /* PassController.swift */; };
+		AA60C88221DFEDF0008CECE7 /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA60C88121DFEDF0008CECE7 /* Pass.swift */; };
 		AAE4667B216D896B00BA6E37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4667A216D896B00BA6E37 /* AppDelegate.swift */; };
 		AAE4667D216D896B00BA6E37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4667C216D896B00BA6E37 /* ViewController.swift */; };
 		AAE46680216D896B00BA6E37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAE4667E216D896B00BA6E37 /* Main.storyboard */; };
@@ -28,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA60C87F21DE0D76008CECE7 /* PassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassController.swift; sourceTree = "<group>"; };
+		AA60C88121DFEDF0008CECE7 /* Pass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 		AAE46677216D896B00BA6E37 /* PassGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE4667A216D896B00BA6E37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AAE4667C216D896B00BA6E37 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 			children = (
 				AAE4667A216D896B00BA6E37 /* AppDelegate.swift */,
 				AAE4667C216D896B00BA6E37 /* ViewController.swift */,
+				AA60C87F21DE0D76008CECE7 /* PassController.swift */,
 				AAE4667E216D896B00BA6E37 /* Main.storyboard */,
 				AAE46681216D896B00BA6E37 /* Assets.xcassets */,
 				AAE46683216D896B00BA6E37 /* LaunchScreen.storyboard */,
@@ -88,6 +93,7 @@
 				AAE4669A216D8A1D00BA6E37 /* Guests and Employees.swift */,
 				AAE4669C216D8DA200BA6E37 /* Person.swift */,
 				AAE4669E216FAECC00BA6E37 /* Possible Errros.swift */,
+				AA60C88121DFEDF0008CECE7 /* Pass.swift */,
 			);
 			path = PassGenerator;
 			sourceTree = "<group>";
@@ -193,9 +199,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA60C88021DE0D76008CECE7 /* PassController.swift in Sources */,
 				AAE4667D216D896B00BA6E37 /* ViewController.swift in Sources */,
 				AAE4667B216D896B00BA6E37 /* AppDelegate.swift in Sources */,
 				AAE4669D216D8DA200BA6E37 /* Person.swift in Sources */,
+				AA60C88221DFEDF0008CECE7 /* Pass.swift in Sources */,
 				AAE4669F216FAECC00BA6E37 /* Possible Errros.swift in Sources */,
 				AAE4669B216D8A1D00BA6E37 /* Guests and Employees.swift in Sources */,
 			);

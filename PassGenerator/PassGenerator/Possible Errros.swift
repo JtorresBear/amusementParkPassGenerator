@@ -25,6 +25,8 @@ enum PossibleErrors: Error
     case missingMonth
     case missingYear
     case notAllowed
+    case noProjectNumber
+    case noSocial
 }
 
 

@@ -8,6 +8,16 @@
 
 import Foundation
 
+enum EntrantType
+{
+    case employee
+    case manager
+    case vendor
+    case contractor
+    case guest
+}
+
+
 
 enum EmployeeType
 {
@@ -18,6 +28,24 @@ enum EmployeeType
     case contract
     case vendor
 }
+
+enum ProjectNumber
+{
+    case n1001
+    case n1002
+    case n1003
+    case n2001
+    case n2002
+}
+
+enum VendorCompany
+{
+    case Acme
+    case Orkin
+    case Fedex
+    case NWElectrical
+}
+
 
 enum GuestType
 {
@@ -56,10 +84,58 @@ struct AreaAccess
         case .rideServicesHourly: self.rideControlAreas = true; amusementAreas = true
         case .maintenanceHourly: self.amusementAreas = true; kitchenAreas = true; self.rideControlAreas = true; self.maintenanceAreas = true
         case .manager: self.amusementAreas = true; self.kitchenAreas = true; self.rideControlAreas = true; self.maintenanceAreas = true; self.OfficeAreas = true
-        case .contract: self.amusementAreas = true; self.kitchenAreas = true
-        case .vendor: self.amusementAreas = true; self.kitchenAreas = true
+        case .vendor: print("should have picked Vendor")
+        case .contract: print("should have picked contract")
         }
     }
+    
+    
+    
+    
+    mutating func figureOutAccess(employeeType: EmployeeType, projectNumber: ProjectNumber)
+    {
+        //guard let project = projectNumber else {throw PossibleErrors.noProjectNumber}
+        
+        switch employeeType
+        {
+        case .foodServicesHourly: self.amusementAreas = true; self.kitchenAreas = true
+        case .rideServicesHourly: self.rideControlAreas = true; amusementAreas = true
+        case .maintenanceHourly: self.amusementAreas = true; kitchenAreas = true; self.rideControlAreas = true; self.maintenanceAreas = true
+        case .manager: self.amusementAreas = true; self.kitchenAreas = true; self.rideControlAreas = true; self.maintenanceAreas = true; self.OfficeAreas = true
+        case .vendor: self.amusementAreas = true; self.kitchenAreas = true
+        case .contract: switch projectNumber
+            {
+            case .n1001: self.amusementAreas = true; self.rideControlAreas = true
+            case .n1002: self.amusementAreas = true; self.rideControlAreas = true; self.maintenanceAreas = true
+            case .n1003: self.amusementAreas = true; self.rideControlAreas = true; self.kitchenAreas = true; self.maintenanceAreas = true; self.OfficeAreas = true
+            case .n2001: self.OfficeAreas = true
+            case .n2002: self.kitchenAreas = true; self.maintenanceAreas = true;
+            }
+        }
+    }
+    
+    
+    mutating func figureOutAccess(employeeType: EmployeeType, vendor: VendorCompany )
+    {
+        switch employeeType
+        {
+        case .foodServicesHourly: self.amusementAreas = true; self.kitchenAreas = true
+        case .rideServicesHourly: self.rideControlAreas = true; amusementAreas = true
+        case .maintenanceHourly: self.amusementAreas = true; kitchenAreas = true; self.rideControlAreas = true; self.maintenanceAreas = true
+        case .manager: self.amusementAreas = true; self.kitchenAreas = true; self.rideControlAreas = true; self.maintenanceAreas = true; self.OfficeAreas = true
+        case .vendor: switch vendor
+            {
+            case .Acme: self.kitchenAreas = true
+            case .Fedex: self.maintenanceAreas = true; self.OfficeAreas = true
+            case .NWElectrical: self.amusementAreas = true; self.rideControlAreas = true; self.kitchenAreas = true; self.maintenanceAreas = true; self.OfficeAreas = true
+            case .Orkin: self.amusementAreas = true; self.rideControlAreas = true; self.kitchenAreas = true
+            
+            }
+        case .contract: print("should have picked contract")
+        }
+    }
+    
+    
     
     mutating func figureOutAccess(guest: GuestType)
     {
@@ -88,6 +164,20 @@ struct RideAccess
         case .freeChildGuest: break
         case .seasonPassGuest: self.skipLinesAllRides = true
         case .seniorGuest: self.skipLinesAllRides = true
+        }
+    }
+    
+    mutating func figureOutAccess(employee: EmployeeType)
+    {
+        switch employee
+        {
+            case .foodServicesHourly: break
+            case .rideServicesHourly: break
+            case .maintenanceHourly: break
+            case .manager: break
+            case .contract: allRides = false
+            case .vendor: allRides = false
+            
         }
     }
     
@@ -135,11 +225,11 @@ extension GuestType
     {
         switch self
         {
-        case .classic: return 0.0
-        case .VIP: return 0.10
+        case .classic: return 0
+        case .VIP: return 10
         case .freeChildGuest: return 0
-        case .seasonPassGuest: return 0.10
-        case .seniorGuest: return 0.10
+        case .seasonPassGuest: return 10
+        case .seniorGuest: return 10
         }
     }
     
@@ -147,11 +237,11 @@ extension GuestType
     {
         switch self
         {
-        case .classic: return 0.0
-        case .VIP: return 0.20
-        case .freeChildGuest: return 0.0
-        case .seasonPassGuest: return 0.20
-        case .seniorGuest:return 0.10
+        case .classic: return 0
+        case .VIP: return 20
+        case .freeChildGuest: return 0
+        case .seasonPassGuest: return 20
+        case .seniorGuest:return 10
         }
     }
     
