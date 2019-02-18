@@ -59,6 +59,16 @@ class Employee: Person
     
     init(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipCode: String?, employeeType: EmployeeType, dobDay: Int?, dobMonth: Int?, dobYear: Int?, ssn: String?) throws
     {
+        if(firstName == "") {throw PossibleErrors.noFIrstName}
+        if(lastName == "") {throw PossibleErrors.noLastName}
+        if(address == "") {throw PossibleErrors.noAddress}
+        if(city == "" ){throw PossibleErrors.noCity}
+        if(state == ""){throw PossibleErrors.noState}
+        if(zipCode == "") {throw PossibleErrors.noZipCode}
+        if(ssn == "") {throw PossibleErrors.noSocial}
+        
+        
+        
         guard let nameOne = firstName else {throw PossibleErrors.noFIrstName}
         guard let nameTwo = lastName else {throw PossibleErrors.noLastName}
         guard let addressone = address else {throw PossibleErrors.noAddress}
@@ -90,6 +100,16 @@ class Employee: Person
     
     init(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipCode: String?, employeeType: EmployeeType, vendor: VendorCompany, dobDay: Int?, dobMonth: Int?, dobYear: Int?, ssn: String?) throws
     {
+        
+        if(firstName == "") {throw PossibleErrors.noFIrstName}
+        if(lastName == "") {throw PossibleErrors.noLastName}
+        if(address == "") {throw PossibleErrors.noAddress}
+        if(city == "" ){throw PossibleErrors.noCity}
+        if(state == ""){throw PossibleErrors.noState}
+        if(zipCode == "") {throw PossibleErrors.noZipCode}
+        if(ssn == "") {throw PossibleErrors.noSocial}
+        
+        
         guard let nameOne = firstName else {throw PossibleErrors.noFIrstName}
         guard let nameTwo = lastName else {throw PossibleErrors.noLastName}
         guard let addressone = address else {throw PossibleErrors.noAddress}
@@ -121,6 +141,16 @@ class Employee: Person
     
     init(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipCode: String?, employeeType: EmployeeType, projectNumber: ProjectNumber, dobDay: Int?, dobMonth: Int?, dobYear: Int?, ssn: String?) throws
     {
+        
+        if(firstName == "") {throw PossibleErrors.noFIrstName}
+        if(lastName == "") {throw PossibleErrors.noLastName}
+        if(address == "") {throw PossibleErrors.noAddress}
+        if(city == "" ){throw PossibleErrors.noCity}
+        if(state == ""){throw PossibleErrors.noState}
+        if(zipCode == "") {throw PossibleErrors.noZipCode}
+        if(ssn == "") {throw PossibleErrors.noSocial}
+        
+        
         guard let nameOne = firstName else {throw PossibleErrors.noFIrstName}
         guard let nameTwo = lastName else {throw PossibleErrors.noLastName}
         guard let addressone = address else {throw PossibleErrors.noAddress}
@@ -227,7 +257,7 @@ class ChildGuest: Guest
         let date = Date()
         let calendar = Calendar.current
         
-        if(calendar.component(.year, from: date) - dobYear >= 5)
+        if(calendar.component(.year, from: date) - dobYear <= 5)
         {
             if(dobMonth <= calendar.component(.month, from: date) )
             {
@@ -247,11 +277,17 @@ class SeasonPass: Guest
     override init(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipCode: String?, guestType: GuestType, dobDay: Int?, dobMonth: Int?, dobYear: Int?) throws {
         
         guard let nameOne = firstName else {throw PossibleErrors.noFIrstName}
+        if(firstName == ""){throw PossibleErrors.noFIrstName}
         guard let nameTwo = lastName else {throw PossibleErrors.noLastName}
+        if(lastName == ""){throw PossibleErrors.noLastName}
         guard let addressone = address else {throw PossibleErrors.noAddress}
+        if(address == "") {throw PossibleErrors.noAddress}
         guard let city1 = city else {throw PossibleErrors.noCity}
+        if( city == "") {throw PossibleErrors.noCity}
         guard let state1 = state else {throw PossibleErrors.noState}
+        if(state == "") {throw PossibleErrors.noState}
         guard let zipcode1 = zipCode else {throw PossibleErrors.noZipCode}
+        if(zipCode == "") {throw PossibleErrors.noZipCode}
         
         try super.init(firstName: nameOne, lastName: nameTwo, address: addressone, city: city1, state: state1, zipCode: zipcode1, guestType: guestType, dobDay: dobDay, dobMonth: dobMonth, dobYear: dobYear)
     }
@@ -264,6 +300,10 @@ class Senior: Guest
 
     override init(firstName: String?, lastName: String?, address: String?, city: String?, state: String?, zipCode: String?, guestType: GuestType, dobDay: Int?, dobMonth: Int?, dobYear: Int?) throws {
 
+        if(firstName == "") {throw PossibleErrors.noFIrstName}
+        if(lastName == "") {throw PossibleErrors.noLastName}
+        
+        
         guard let nameOne = firstName else {throw PossibleErrors.noFIrstName}
         guard let nameTwo = lastName else {throw PossibleErrors.noLastName}
         guard let dobDay = dobDay else {throw PossibleErrors.missingBirthDay}

@@ -27,6 +27,10 @@ enum PossibleErrors: Error
     case notAllowed
     case noProjectNumber
     case noSocial
+    case noCompanySelected
+    case EmployeeTypeNotSelected
+    case ManagerTypeNotSelected
+    case GuestTypeNotSelected
 }
 
 

@@ -13,15 +13,22 @@ class Pass {
     
     var person: Person
     var entrantType: EntrantType
+    var extraInfo: String = ""
     
     
     init(person: Person, entrantType: EntrantType)
     {
         self.person = person
         self.entrantType = entrantType
+        
     }
     
-    
+    init(person: Person, entrantType: EntrantType, extraInfo: String)
+    {
+        self.person = person
+        self.entrantType = entrantType
+        self.extraInfo = extraInfo
+    }
     
     
     
@@ -59,11 +66,11 @@ class Pass {
     {
         switch entrantType
         {
-        case .employee: return "Employee"
-        case .manager: return "Manager"
-        case .vendor: return "Vendor"
-        case .contractor: return "Contractor"
-        case .guest: return "Guest"
+        case .employee: return "\(extraInfo) Employee"
+        case .manager: return "\(extraInfo) Manager"
+        case .vendor: return "Vendor \(extraInfo)"
+        case .contractor: return "Contractor \(extraInfo)"
+        case .guest: return "\(extraInfo) Guest"
         }
     }
     

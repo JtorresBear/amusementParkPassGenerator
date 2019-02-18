@@ -55,8 +55,13 @@ class ViewController: UIViewController {
     var projectNumberP: ProjectNumber = .n1001
     var vendorCompanyP: VendorCompany = .Acme
     var guestTypeP: GuestType = .classic
+    var managerTypeP: ManagementType = .shift
     
-    
+    var projectNSelected = false
+    var compSelected = false
+    var managerSelected = false
+    var employeeSelected = false
+    var guestSelected = false
     
     
     
@@ -73,6 +78,7 @@ class ViewController: UIViewController {
         hideStackView2Buttons()
         EntrantTypeLabel.text = ""
         SubEntrantTypeLabel.text = ""
+        clearTextFields()
     }
     
     
@@ -91,7 +97,11 @@ class ViewController: UIViewController {
         ButtonThree.setTitle("Child Guest", for: .normal)
         ButtonFour.setTitle("Season Pass", for: .normal)
         ButtonFive.setTitle("Senior", for: .normal)
-        
+        projectNSelected = false
+        compSelected = false
+        guestSelected = false
+        managerSelected = false
+        employeeSelected = false
         showFiveButtons()
         
         entrantP = .guest
@@ -113,7 +123,11 @@ class ViewController: UIViewController {
         ButtonTwo.setTitle("Ride Service", for: .normal)
         ButtonThree.setTitle("Maintenance", for: .normal)
 
-        
+        projectNSelected = false
+        compSelected = false
+        guestSelected = false
+        managerSelected = false
+        employeeSelected = false
         showThreeButtons()
         
         entrantP = .employee
@@ -127,14 +141,26 @@ class ViewController: UIViewController {
     
     @IBAction func changeForManager(_ sender: UIButton) {
         
-        hideStackView2Buttons()
+        ButtonOne.setTitle("Shift M", for: .normal)
+        ButtonTwo.setTitle("General M", for: .normal)
+        ButtonThree.setTitle("Senior M", for: .normal)
         
+        
+        
+        
+        projectNSelected = false
+        compSelected = false
+        guestSelected = false
+        managerSelected = false
+        employeeSelected = false
+        
+        showThreeButtons()
         entrantP = .manager
         employeeTypeP = .manager
         enableAllTextFields(isEnabled: true)
         
-        EntrantTypeLabel.text = "Employee"
-        SubEntrantTypeLabel.text = "Manager"
+        EntrantTypeLabel.text = "Manager"
+        SubEntrantTypeLabel.text = ""
         
         buttonPressed = true
     }
@@ -142,7 +168,11 @@ class ViewController: UIViewController {
  
     @IBAction func changeBottomToVendorButtons(_ sender: UIButton) {
         //hideStackView2Buttons()
-        
+        projectNSelected = false
+        compSelected = false
+        guestSelected = false
+        managerSelected = false
+        employeeSelected = false
         ButtonOne.setTitle("Acme", for: .normal)
         ButtonTwo.setTitle("Orkin", for: .normal)
         ButtonThree.setTitle("Fedex", for: .normal)
@@ -167,7 +197,11 @@ class ViewController: UIViewController {
         ButtonThree.setTitle("1003", for: .normal)
         ButtonFour.setTitle("2001", for: .normal)
         ButtonFive.setTitle("2002", for: .normal)
-        
+        projectNSelected = false
+        compSelected = false
+        guestSelected = false
+        managerSelected = false
+        employeeSelected = false
         showFiveButtons()
         
         entrantP = .contractor
@@ -191,16 +225,22 @@ class ViewController: UIViewController {
         {
         case .employee: employeeTypeP = .foodServicesHourly
             SubEntrantTypeLabel.text = "Food Service"
-        case .manager: break;
+            employeeSelected = true
+        case .manager: managerTypeP = .shift
+        SubEntrantTypeLabel.text = "Shift M"
+            managerSelected = true
         case .vendor: vendorCompanyP = .Acme
             SubEntrantTypeLabel.text = "Acme"
+        compSelected = true
         case .contractor: projectNumberP = .n1001
         SubEntrantTypeLabel.text = "Project# 1001"
+        projectNSelected = true
         case .guest: guestTypeP = .classic
             enableAllTextFields(isEnabled: false)
             enable(textField: FirstNameTextField, enabled: true)
             enable(textField: LastNameTextField, enabled: true)
             SubEntrantTypeLabel.text = "Classic"
+            guestSelected = true
         }
     }
     
@@ -209,16 +249,22 @@ class ViewController: UIViewController {
         {
             case .employee: employeeTypeP = .rideServicesHourly
                 SubEntrantTypeLabel.text = "Ride Service"
-            case .manager: break;
+                employeeSelected = true
+            case .manager: managerTypeP = .general
+            SubEntrantTypeLabel.text = "General M"
+            managerSelected = true
             case .vendor: vendorCompanyP = .Orkin
                 SubEntrantTypeLabel.text = "Orkin"
+            compSelected = true
             case .contractor: projectNumberP = .n1002
             SubEntrantTypeLabel.text = "Project# 1002"
+            projectNSelected = true
             case .guest: guestTypeP = .VIP
                 enableAllTextFields(isEnabled: false)
                 enable(textField: FirstNameTextField, enabled: true)
                 enable(textField: LastNameTextField, enabled: true)
                 SubEntrantTypeLabel.text = "VIP Guest"
+            guestSelected = true
         }
     }
     
@@ -229,17 +275,23 @@ class ViewController: UIViewController {
         {
             case .employee: employeeTypeP = .maintenanceHourly
                 SubEntrantTypeLabel.text = "Maintencance"
-            case .manager: break;
+                employeeSelected = true
+            case .manager: managerTypeP = .senior
+            SubEntrantTypeLabel.text = "Senior M"
+            managerSelected = true
             case .vendor: vendorCompanyP = .Fedex
                 SubEntrantTypeLabel.text = "Fedex"
+            compSelected = true
             case .contractor: projectNumberP = .n1003
             SubEntrantTypeLabel.text = "Project# 1003"
+            projectNSelected = true
             case .guest: guestTypeP = .freeChildGuest
                 enableAllTextFields(isEnabled: false)
                 enable(textField: MMTextField, enabled: true)
                 enable(textField: DDTextField, enabled: true)
                 enable(textField: YYYYTextField, enabled: true)
                 SubEntrantTypeLabel.text = "Child Guest"
+            guestSelected = true
         }
     }
     
@@ -251,13 +303,16 @@ class ViewController: UIViewController {
             case .manager: break;
             case .vendor: vendorCompanyP = .NWElectrical
                 SubEntrantTypeLabel.text = "NW Electrical"
+            compSelected = true
             case .contractor: projectNumberP = .n2001
             SubEntrantTypeLabel.text = "Project# 2001"
+            projectNSelected = true
             case .guest: guestTypeP = .seasonPassGuest
                 enableAllTextFields(isEnabled: true)
                 enable(textField: SSNTextField, enabled: false)
                 enable(textField: CompanyTextField, enabled: false)
                 SubEntrantTypeLabel.text = "Season Pass"
+            guestSelected = true
         }
     }
     
@@ -269,6 +324,7 @@ class ViewController: UIViewController {
             case .vendor: break;
             case .contractor: projectNumberP = .n2002
             SubEntrantTypeLabel.text = "Project# 2002"
+            projectNSelected = true
             case .guest: guestTypeP = .seniorGuest
                 enableAllTextFields(isEnabled: false)
                 enable(textField: MMTextField, enabled: true)
@@ -277,6 +333,7 @@ class ViewController: UIViewController {
                 enable(textField: FirstNameTextField, enabled: true)
                 enable(textField: LastNameTextField, enabled: true)
                 SubEntrantTypeLabel.text = "Senior Guest"
+            guestSelected = true
             
             
         }
@@ -285,6 +342,477 @@ class ViewController: UIViewController {
     
     
 
+    
+    
+   
+    
+    @IBAction func GeneratePass(_ sender: Any)
+    {
+        if(buttonPressed)
+        {
+                switch entrantP
+                {
+                    
+                    //Manager has a special case so it's first in the switch statement so it can be skipped first
+                    case .manager:
+                            do{
+                                if(!managerSelected){throw PossibleErrors.ManagerTypeNotSelected}
+                                
+                                let manager = try Employee(firstName: FirstNameTextField.text, lastName: LastNameTextField.text, address: StreetAddressTextField.text, city: CityTextField.text, state: StateTextField.text, zipCode: ZipCodeTextField.text, employeeType: employeeTypeP, dobDay: Int(DDTextField.text!) , dobMonth: Int(MMTextField.text!), dobYear: Int(YYYYTextField.text!), ssn: SSNTextField.text)
+                                var extraInfo = ""
+                                switch managerTypeP
+                                {
+                                case .shift: extraInfo = "Shift"
+                                case .senior: extraInfo = "Senior"
+                                case .general: extraInfo = "General"
+                                }
+                                
+                                pass = Pass(person: manager, entrantType: .manager, extraInfo: extraInfo)
+                                
+                            }
+                            catch {genericAlert(error: error)}
+                    //employee have three different types, the reas will break
+                case .employee:
+                    do{
+                        if(!employeeSelected){throw PossibleErrors.EmployeeTypeNotSelected}
+                        
+                        let employee = try Employee(firstName: FirstNameTextField.text, lastName: LastNameTextField.text, address: StreetAddressTextField.text, city: CityTextField.text, state: StateTextField.text, zipCode: ZipCodeTextField.text, employeeType: employeeTypeP, dobDay: Int(DDTextField.text!) , dobMonth: Int(MMTextField.text!), dobYear: Int(YYYYTextField.text!), ssn: SSNTextField.text)
+
+                        var extraInfo: String
+                        switch employeeTypeP
+                        {
+                        case .foodServicesHourly: extraInfo = "Food Service"
+                        case .maintenanceHourly: extraInfo = "Maintenance"
+                        case .rideServicesHourly: extraInfo = "Ride Service"
+                        default: extraInfo = ""
+                        }
+                        
+                        pass = Pass(person: employee, entrantType: .employee, extraInfo: extraInfo)
+                    } catch {genericAlert(error: error)}
+                    
+                case .vendor: do
+                {
+                    if(!compSelected){throw PossibleErrors.noCompanySelected}
+                    
+                    let vendor = try Employee(firstName: FirstNameTextField.text, lastName: LastNameTextField.text, address: StreetAddressTextField.text, city: CityTextField.text, state: StateTextField.text, zipCode: ZipCodeTextField.text, employeeType: employeeTypeP, vendor: vendorCompanyP, dobDay: Int(DDTextField.text!) , dobMonth: Int(MMTextField.text!), dobYear: Int(YYYYTextField.text!), ssn: SSNTextField.text)
+                    var extraInfo: String
+                    switch vendorCompanyP
+                    {
+                    case .Acme: extraInfo = "Acme"
+                    case.Fedex: extraInfo = "Fedex"
+                    case .NWElectrical: extraInfo = "NW Electrical"
+                    case .Orkin: extraInfo = "Orkin"
+                    }
+                    
+                    
+                    
+                    pass = Pass(person: vendor, entrantType: .vendor, extraInfo: extraInfo)
+                }
+                catch {genericAlert(error: error)}
+                case .contractor: do
+                {
+                    if(!projectNSelected){throw PossibleErrors.noProjectNumber}
+                    
+                    let projectN = try Employee(firstName: FirstNameTextField.text, lastName: LastNameTextField.text, address: StreetAddressTextField.text, city: CityTextField.text, state: StateTextField.text, zipCode: ZipCodeTextField.text, employeeType: employeeTypeP, projectNumber: projectNumberP, dobDay: Int(DDTextField.text!) , dobMonth: Int(MMTextField.text!), dobYear: Int(YYYYTextField.text!), ssn: SSNTextField.text)
+                    
+                    var extraInfo: String
+                    switch projectNumberP
+                    {
+                    case .n1001: extraInfo = "Project #1001"
+                    case .n1002: extraInfo = "Project #1002"
+                    case .n1003: extraInfo = "Project #1003"
+                    case .n2001: extraInfo = "Project #2001"
+                    case .n2002: extraInfo = "project #2002"
+                    }
+                    
+                    pass = Pass(person: projectN, entrantType: .contractor, extraInfo: extraInfo)
+                    
+                }
+                catch {genericAlert(error: error)}
+
+                case .guest: switch guestTypeP
+                {
+                case .classic: do
+                {
+                    var fName = ""
+                    var lName = ""
+                    if(FirstNameTextField.hasText)
+                    {
+                        fName = FirstNameTextField.text!
+                    } else {fName = "No name"}
+                    
+                    if(LastNameTextField.hasText)
+                    {
+                        lName = LastNameTextField.text!
+                    } else {lName = "" }
+                    
+                    
+                    let guest = try Guest(firstName: fName, lastName: lName, address: nil, city: nil, state: nil, zipCode: nil, guestType: guestTypeP, dobDay: nil, dobMonth: nil, dobYear: nil)
+                    pass = Pass(person: guest, entrantType: .guest, extraInfo: "Classic")
+                } catch {genericAlert(error: error)}
+                case .freeChildGuest: do
+                {
+                    let childGuest = try ChildGuest(firstName: nil, lastName: nil, address: nil, city: nil, state: nil, zipCode: nil, guestType: guestTypeP, dobDay: Int(DDTextField.text!), dobMonth: Int(MMTextField.text!), dobYear: Int(YYYYTextField.text!))
+                    
+                    pass = Pass(person: childGuest, entrantType: .guest, extraInfo: "Child")
+                } catch {genericAlert(error: error)}
+                case .seasonPassGuest: do
+                {
+                    let seasonGuest = try SeasonPass(firstName: FirstNameTextField.text, lastName: LastNameTextField.text, address: StreetAddressTextField.text, city: CityTextField.text, state: StateTextField.text, zipCode: ZipCodeTextField.text, guestType: guestTypeP, dobDay: Int(DDTextField.text!), dobMonth: Int(DDTextField.text!), dobYear: Int(YYYYTextField.text!))
+                    
+                    pass = Pass(person: seasonGuest, entrantType: .guest, extraInfo: "Season Pass")
+                } catch {genericAlert(error: error)}
+                case .seniorGuest: do
+                {
+                    let seniorGuest = try Senior(firstName: FirstNameTextField.text, lastName: LastNameTextField.text, address: nil, city: nil, state: nil, zipCode: nil, guestType: guestTypeP, dobDay: Int(DDTextField.text!), dobMonth: Int(MMTextField.text!), dobYear: Int(YYYYTextField.text!))
+                    
+                    pass = Pass(person: seniorGuest, entrantType: .guest, extraInfo: "Senior")
+                } catch
+                {
+                    genericAlert(error: error)
+                }
+                case .VIP: do
+                {
+                    var fName = ""
+                    var lName = ""
+                    if(FirstNameTextField.hasText)
+                    {
+                        fName = FirstNameTextField.text!
+                    } else {fName = "No name"}
+                    
+                    if(LastNameTextField.hasText)
+                    {
+                        lName = LastNameTextField.text!
+                    } else {lName = "" }
+                    
+                    
+                    let guest = try Guest(firstName: fName, lastName: lName, address: nil, city: nil, state: nil, zipCode: nil, guestType: guestTypeP, dobDay: nil, dobMonth: nil, dobYear: nil)
+                    pass = Pass(person: guest, entrantType: .guest, extraInfo: "VIP")
+                } catch {genericAlert(error: error)}
+                }
+                    
+                }
+    }
+        else
+        {
+            let alert = UIAlertController(title: "Error", message: "Please Select Something", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Try Agian", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
+    
+    
+    
+    @IBAction func populateData(_ sender: UIButton) {
+        
+        switch entrantP
+        {
+        case .manager: DDTextField.text = "12"
+        MMTextField.text = "03"
+        YYYYTextField.text = "1990"
+        
+        FirstNameTextField.text = "Tom"
+        LastNameTextField.text = "Hariot"
+        
+        SSNTextField.text = "773461234"
+        
+        CompanyTextField.text = "FunLand"
+        
+        StreetAddressTextField.text = "12890 N Tumor Road"
+        CityTextField.text = "Albany"
+        StateTextField.text = "New York"
+        ZipCodeTextField.text = "33889"
+        case .employee: switch employeeTypeP
+        {
+        case .foodServicesHourly: DDTextField.text = "01"
+        MMTextField.text = "11"
+        YYYYTextField.text = "1997"
+        
+        FirstNameTextField.text = "Larry"
+        LastNameTextField.text = "Hule"
+        
+        SSNTextField.text = "987631827"
+        CompanyTextField.text = "FunLand"
+        
+        StreetAddressTextField.text = "1234 w Upper East ave"
+        CityTextField.text = "Albany"
+        StateTextField.text = "New York"
+        ZipCodeTextField.text = "40889"
+        
+        case .maintenanceHourly: DDTextField.text = "01"
+        MMTextField.text = "10"
+        YYYYTextField.text = "1987"
+        
+        FirstNameTextField.text = "Lard"
+        LastNameTextField.text = "Hules"
+        
+        SSNTextField.text = "917691827"
+        CompanyTextField.text = "FunLand"
+        
+        StreetAddressTextField.text = "190 s 33rd st"
+        CityTextField.text = "Albany"
+        StateTextField.text = "New York"
+        ZipCodeTextField.text = "33089"
+        case .rideServicesHourly: DDTextField.text = "08"
+        MMTextField.text = "18"
+        YYYYTextField.text = "2000"
+        
+        FirstNameTextField.text = "Jimmy"
+        LastNameTextField.text = "Tuco"
+        
+        SSNTextField.text = "987630987"
+        CompanyTextField.text = "FunLand"
+        
+        StreetAddressTextField.text = "134 E NoRiver Blvd"
+        CityTextField.text = "Albany"
+        StateTextField.text = "New York"
+        ZipCodeTextField.text = "33555"
+        case .vendor: break
+        case .manager: break
+        case .contract: break
+        }
+        case .contractor:switch projectNumberP
+        {
+        case .n1001: DDTextField.text = "22"
+        MMTextField.text = "12"
+        YYYYTextField.text = "1970"
+        
+        FirstNameTextField.text = "Carry"
+        LastNameTextField.text = "Underwood"
+        
+        SSNTextField.text = "997341827"
+        CompanyTextField.text = "1001"
+        
+        StreetAddressTextField.text = "1234 blooomWood Ave"
+        CityTextField.text = "Polar"
+        StateTextField.text = "New Jersey"
+        ZipCodeTextField.text = "22889"
+        case .n1002: DDTextField.text = "01"
+        MMTextField.text = "08"
+        YYYYTextField.text = "1976"
+        
+        FirstNameTextField.text = "Larry"
+        LastNameTextField.text = "Croft"
+        
+        SSNTextField.text = "222631827"
+        CompanyTextField.text = "FunLand"
+        
+        StreetAddressTextField.text = "1234 n otReal Rd"
+        CityTextField.text = "JacobsVille"
+        StateTextField.text = "New Jersey"
+        ZipCodeTextField.text = "33844"
+        case .n1003: DDTextField.text = "04"
+        MMTextField.text = "02"
+        YYYYTextField.text = "1999"
+        
+        FirstNameTextField.text = "Luarie"
+        LastNameTextField.text = "House"
+        
+        SSNTextField.text = "987632227"
+        CompanyTextField.text = "1003"
+        
+        StreetAddressTextField.text = "1444 S Ouncool ST"
+        CityTextField.text = "Sway"
+        StateTextField.text = "Illinois"
+        ZipCodeTextField.text = "60804"
+        case .n2001: DDTextField.text = "28"
+        MMTextField.text = "02"
+        YYYYTextField.text = "1988"
+        
+        FirstNameTextField.text = "Michele"
+        LastNameTextField.text = "Delacruz"
+        
+        SSNTextField.text = "111224444"
+        CompanyTextField.text = "HomeField"
+        
+        StreetAddressTextField.text = "1903 S RiverRoad Rd"
+        CityTextField.text = "Chicago"
+        StateTextField.text = "Florida"
+        ZipCodeTextField.text = "33889"
+        case .n2002: DDTextField.text = "01"
+        MMTextField.text = "11"
+        YYYYTextField.text = "1997"
+        
+        FirstNameTextField.text = "Kenny"
+        LastNameTextField.text = "Rivera"
+        
+        SSNTextField.text = "676761827"
+        CompanyTextField.text = "2002"
+        
+        StreetAddressTextField.text = "9898 S 56th CT"
+        CityTextField.text = "Chicago"
+        StateTextField.text = "Alaska"
+        ZipCodeTextField.text = "20289"
+            }
+        case .guest: switch guestTypeP
+        {
+        case .classic:
+        FirstNameTextField.text = "John"
+        LastNameTextField.text = "Johnny"
+        case .freeChildGuest: DDTextField.text = "12"
+        MMTextField.text = "12"
+        YYYYTextField.text = "2015"
+        
+        case .seasonPassGuest:
+            FirstNameTextField.text = "Sam"
+            LastNameTextField.text = "Penny"
+            StreetAddressTextField.text = "77 Lucky St"
+            CityTextField.text = "Brook"
+            StateTextField.text = "Illinois"
+            ZipCodeTextField.text = "60807"
+            DDTextField.text = "29"
+            MMTextField.text = "07"
+            YYYYTextField.text = "1998"
+        
+        
+        case .seniorGuest: DDTextField.text = "01"
+        MMTextField.text = "11"
+        YYYYTextField.text = "1950"
+        
+        FirstNameTextField.text = "Mario"
+        LastNameTextField.text = "Guzman"
+        case .VIP: FirstNameTextField.text = "Smith"
+        LastNameTextField.text = "Torres"
+        }
+        case .vendor:
+            switch vendorCompanyP
+            {
+            case .Acme: DDTextField.text = "12"
+            MMTextField.text = "12"
+            YYYYTextField.text = "1980"
+            
+            FirstNameTextField.text = "Timmy"
+            LastNameTextField.text = "Louis"
+            
+            SSNTextField.text = "123121234"
+            
+            CompanyTextField.text = "Acme"
+            
+            StreetAddressTextField.text = "1 nowhere road"
+            CityTextField.text = "not here"
+            StateTextField.text = "florida"
+            ZipCodeTextField.text = "09098"
+            case .Fedex:DDTextField.text = "11"
+            MMTextField.text = "11"
+            YYYYTextField.text = "1981"
+            
+            FirstNameTextField.text = "Bimmy"
+            LastNameTextField.text = "Pouis"
+            
+            SSNTextField.text = "123155234"
+            
+            CompanyTextField.text = "Fedex"
+            
+            StreetAddressTextField.text = "2 nowhere road"
+            CityTextField.text = "not there"
+            StateTextField.text = "florida"
+            ZipCodeTextField.text = "09097"
+            case .NWElectrical: DDTextField.text = "10"
+            MMTextField.text = "10"
+            YYYYTextField.text = "1989"
+            
+            FirstNameTextField.text = "Cimmy"
+            LastNameTextField.text = "Wouis"
+            
+            SSNTextField.text = "126655234"
+            
+            CompanyTextField.text = "NW Electrical"
+            
+            StreetAddressTextField.text = "3 nowhere road"
+            CityTextField.text = "not Anywhere"
+            StateTextField.text = "florida"
+            ZipCodeTextField.text = "12097"
+            case .Orkin: DDTextField.text = "09"
+            MMTextField.text = "09"
+            YYYYTextField.text = "1977"
+            
+            FirstNameTextField.text = "Mimmy"
+            LastNameTextField.text = "Mouis"
+            
+            SSNTextField.text = "123199008"
+            
+            CompanyTextField.text = "Orkin"
+            
+            StreetAddressTextField.text = "6 nowhere road"
+            CityTextField.text = "not Over"
+            StateTextField.text = "Arizona"
+            ZipCodeTextField.text = "12097"
+            }
+        }
+        
+        
+    }
+    
+    
+    func clearTextFields()
+    {
+        DDTextField.text = nil
+        MMTextField.text = nil
+        YYYYTextField.text = nil
+        
+        FirstNameTextField.text = nil
+        LastNameTextField.text = nil
+        
+        SSNTextField.text = nil
+        
+        CompanyTextField.text = nil
+        
+        StreetAddressTextField.text = nil
+        CityTextField.text = nil
+        StateTextField.text = nil
+        ZipCodeTextField.text = nil
+    }
+    
+    
+    
+    
+    func showFiveButtons()
+    {
+        ButtonOne.isHidden = false
+        ButtonTwo.isHidden = false
+        ButtonThree.isHidden = false
+        ButtonFour.isHidden = false
+        ButtonFive.isHidden = false
+    }
+    
+    func showFourButtons()
+    {
+        ButtonOne.isHidden = false
+        ButtonTwo.isHidden = false
+        ButtonThree.isHidden = false
+        ButtonFour.isHidden = false
+        ButtonFive.isHidden = true
+    }
+    
+    func showThreeButtons()
+    {
+        ButtonOne.isHidden = false
+        ButtonTwo.isHidden = false
+        ButtonThree.isHidden = false
+        ButtonFour.isHidden = true
+        ButtonFive.isHidden = true
+    }
+    
+    
+    @IBAction func back(sender: UIStoryboardSegue)
+    {
+        clearTextFields()
+        EntrantTypeLabel.text = ""
+        SubEntrantTypeLabel.text = ""
+        hideStackView2Buttons()
+        enableAllTextFields(isEnabled: true)
+        
+        compSelected = false
+        projectNSelected = false
+        buttonPressed = false
+    }
+    
+    func genericAlert<T>(error: T) {
+        let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Try Agian", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
     func hideStackView2Buttons()
     {
         ButtonOne.isHidden = true
@@ -333,109 +861,6 @@ class ViewController: UIViewController {
         enable(textField: ZipCodeTextField, enabled: isEnabled)
         
     }
-    
-   
-    
-    @IBAction func GeneratePass(_ sender: Any)
-    {
-        switch entrantP
-        {
-        case .manager:
-            do{
-                let manager = try Employee(firstName: FirstNameTextField.text, lastName: LastNameTextField.text, address: StreetAddressTextField.text, city: CityTextField.text, state: StateTextField.text, zipCode: ZipCodeTextField.text, employeeType: employeeTypeP, dobDay: Int(DDTextField.text!) , dobMonth: Int(MMTextField.text!), dobYear: Int(YYYYTextField.text!), ssn: SSNTextField.text)
-                print("there's no problem here?")
-                pass = Pass(person: manager, entrantType: .manager)
-                print("there's no problem here?")
-            }
-            catch {print("there's a problem")}
-        case .employee: switch employeeTypeP
-        {
-            
-            
-        case .foodServicesHourly:
-            break
-        case .rideServicesHourly:
-            break
-        case .maintenanceHourly:
-            break
-        case .manager:
-            break
-        case .contract:
-            break
-        case .vendor:
-            break
-            }
-        case .vendor: if employeeTypeP == .vendor
-        {
-            
-            }
-        case .contractor: if employeeTypeP == .contract
-        {
-            
-            }
-        case .guest: if guestTypeP == .classic{}
-        }
-    }
-    
-    
-    
-    @IBAction func populateData(_ sender: UIButton) {
-        
-        DDTextField.text = "12"
-        MMTextField.text = "12"
-        YYYYTextField.text = "1221"
-        
-        FirstNameTextField.text = "Jones"
-        LastNameTextField.text = "LEE"
-        
-        SSNTextField.text = "112121212"
-        
-        CompanyTextField.text = "Bazaar"
-        
-        StreetAddressTextField.text = "1232"
-        CityTextField.text = "albany"
-        StateTextField.text = "new york"
-        ZipCodeTextField.text = "23232"
-        
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    func showFiveButtons()
-    {
-        ButtonOne.isHidden = false
-        ButtonTwo.isHidden = false
-        ButtonThree.isHidden = false
-        ButtonFour.isHidden = false
-        ButtonFive.isHidden = false
-    }
-    
-    func showFourButtons()
-    {
-        ButtonOne.isHidden = false
-        ButtonTwo.isHidden = false
-        ButtonThree.isHidden = false
-        ButtonFour.isHidden = false
-        ButtonFive.isHidden = true
-    }
-    
-    func showThreeButtons()
-    {
-        ButtonOne.isHidden = false
-        ButtonTwo.isHidden = false
-        ButtonThree.isHidden = false
-        ButtonFour.isHidden = true
-        ButtonFive.isHidden = true
-    }
-    
-    
-    
-    
     
     
     

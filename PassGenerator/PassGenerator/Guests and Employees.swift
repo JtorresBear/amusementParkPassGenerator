@@ -17,7 +17,12 @@ enum EntrantType
     case guest
 }
 
-
+enum ManagementType
+{
+    case shift
+    case general
+    case senior
+}
 
 enum EmployeeType
 {
@@ -192,12 +197,12 @@ extension EmployeeType
     {
         switch self
         {
-        case .foodServicesHourly: return 0.15
-        case .rideServicesHourly: return 0.15
-        case .maintenanceHourly: return 0.15
-        case .manager: return 0.25
-        case .contract: return 0.0
-        case .vendor: return 0.0
+        case .foodServicesHourly: return 15
+        case .rideServicesHourly: return 15
+        case .maintenanceHourly: return 15
+        case .manager: return 25
+        case .contract: return 0
+        case .vendor: return 0
         }
     }
     
@@ -205,12 +210,12 @@ extension EmployeeType
     {
         switch  self
         {
-        case .foodServicesHourly: return 0.25
-        case .rideServicesHourly: return 0.25
-        case .maintenanceHourly: return 0.25
-        case .manager: return 0.25
-        case .contract: return 0.0
-        case .vendor: return 0.0
+        case .foodServicesHourly: return 25
+        case .rideServicesHourly: return 25
+        case .maintenanceHourly: return 25
+        case .manager: return 25
+        case .contract: return 0
+        case .vendor: return 0
         }
     }
 }
